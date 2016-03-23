@@ -43,3 +43,65 @@ Sample Output
 1 2 3
 7 8 9
 1 2 3 5 7 8 9
+*/
+import java.util.*;
+public class Solution {
+       
+    public static void quicksort(int[] array, int left, int right) {
+        
+		if (right - left >= 2) {
+	 	   int pivot = partition(array, left, right);
+	 	   quicksort(array, left, pivot);
+	 	   quicksort(array, (pivot + 1), right);
+	 	   print(array, left, right);
+		}
+	}
+    
+    static int partition(int[] array, int left, int right) {
+              
+		int pivot = array[left];
+		List<Integer> smallerElements = new ArrayList<Integer>(array.length);
+		List<Integer> largerElements = new ArrayList<Integer>(array.length);
+
+		for (int i = left + 1; i < right; ++i) {
+			if (array[i] < pivot) {
+				smallerElements.add(array[i]);
+			} else {
+				largerElements.add(array[i]);
+			}
+		}
+
+		for (int i = 0; i < smallerElements.size(); ++i) {
+			array[left + i] = smallerElements.get(i);
+		}
+
+		array[left + smallerElements.size()] = pivot;
+
+		for (int i = 0; i < largerElements.size(); ++i) {
+			array[left + smallerElements.size() + 1 + i] = largerElements.get(i);
+		}
+
+		return left + smallerElements.size();
+       }
+ 
+    private static void print(int[] array, int left, int right) {
+		for (int i = left; i < right; ++i) {
+			print(array[i]);
+		}
+		System.out.println("");
+	}
+
+	private static void print(int element) {
+		System.out.print(Integer.toString(element) + " ");
+	}
+       
+      public static void main(String[] args) {
+           Scanner in = new Scanner(System.in);
+           int n = in.nextInt();
+           int[] ar = new int[n];
+           for(int i=0;i<n;i++){
+              ar[i]=in.nextInt(); 
+           }
+           quicksort(ar, 0, ar.length);
+       }    
+   }
