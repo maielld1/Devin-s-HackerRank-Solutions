@@ -8,7 +8,6 @@ Solution: Using bitwise xor on each integer, each integer pair will cancel each 
 
 """
 
-Given , find and print the unique element.
 def lonelyinteger(a):
     answer = 0
     for number in a:
